@@ -224,15 +224,14 @@
 
     const overview = createElement("section", "benchmark-overview");
     const benchmarkTitle = createElement("h2", "benchmark-title");
-    benchmarkTitle.append(coloredDAS(), document.createTextNode("-Bench"));
+    benchmarkTitle.append(coloredDAS(), document.createTextNode("-Bench & Results"));
     const evidence = createElement("div", "benchmark-evidence");
     [
-      ["01", "Quantitative Comparison", "./assets/das_bench_web.png", "DAS-Bench quantitative results"],
-      ["02", "Qualitative Comparison", "./assets/das_exps_web.png", "Qualitative comparison of survey artifacts"],
-    ].forEach(([index, label, source, alt]) => {
-      const figure = createElement("figure", "benchmark-image-panel");
-      const caption = createElement("figcaption");
-      caption.append(createElement("span", "", index), createElement("strong", "", label));
+      ["01", "./assets/das_bench_web.png", "DAS-Bench & Results quantitative results"],
+      ["02", "./assets/das_exps_web.png", "Qualitative manuscript comparison results"],
+    ].forEach(([index, source, alt]) => {
+      const figureClass = index === "01" ? "benchmark-result-figure" : "benchmark-qualitative-figure";
+      const figure = createElement("figure", `benchmark-image-panel ${figureClass}`);
       const link = createElement("a");
       link.href = source;
       link.target = "_blank";
@@ -241,7 +240,7 @@
       image.src = source;
       image.alt = alt;
       link.append(image);
-      figure.append(caption, link);
+      figure.append(link);
       evidence.append(figure);
     });
     overview.append(benchmarkTitle, evidence);
@@ -471,7 +470,7 @@
     const navigationLabels = [
       "Why DAS",
       "How DAS Works",
-      "DAS-Bench",
+      "DAS-Bench & Results",
       "Surveys by DAS",
     ];
 
@@ -696,9 +695,9 @@
       );
       const description = createElement("i");
       description.append(
-        document.createTextNode(": a "),
+        document.createTextNode(" : "),
         createElement("strong", "publication-accent", "publication-oriented"),
-        document.createTextNode(" academic survey generation system"),
+        document.createTextNode(" academic survey automation"),
       );
       brand.append(acronym, description);
 

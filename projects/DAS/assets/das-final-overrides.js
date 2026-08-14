@@ -119,20 +119,40 @@
     const statement = document.querySelector(".hero-statement");
     if (statement) {
       replace(statement, [
-        document.createTextNode("The first stateful agentic framework for "),
-        publicationAccent("publication-oriented"),
-        document.createTextNode(" academic survey generation."),
+        document.createTextNode("The first "),
+        element("strong", "hero-tagline-accent", "stateful agentic"),
+        document.createTextNode(" framework for "),
+        element("strong", "hero-tagline-accent", "automatically generating"),
+        document.createTextNode(" "),
+        element("strong", "hero-tagline-accent", "publication-oriented"),
+        document.createTextNode(" academic surveys "),
+        element("strong", "hero-tagline-accent", "within 1 hour"),
+        document.createTextNode("."),
       ]);
     }
 
     const title = document.querySelector(".motivation-title");
     if (title) {
       replace(title, [
-        document.createTextNode("Designed to turn a research topic into a "),
-        publicationAccent("publication-oriented"),
-        document.createTextNode(" survey in about "),
-        element("em", "", "1 hour."),
+        document.createTextNode("Designed to automatically turn a research topic into a "),
+        element("strong", "why-title-accent", "publication-oriented"),
+        document.createTextNode(" survey "),
+        element("strong", "why-title-accent", "within 1 hour"),
+        document.createTextNode("."),
       ]);
+    }
+    const correspondingMark = document.querySelector(".hero-authors span:last-of-type sup");
+    if (correspondingMark && !correspondingMark.dataset.correspondingAuthor) {
+      correspondingMark.dataset.correspondingAuthor = "true";
+      const emailIcon = element("span", "corresponding-author-email", "✉");
+      emailIcon.setAttribute("role", "img");
+      emailIcon.setAttribute("aria-label", "Corresponding author");
+      emailIcon.title = "Corresponding author";
+      replace(correspondingMark, [document.createTextNode("1,"), emailIcon]);
+    }
+    const benchmarkHighlight = document.querySelectorAll(".highlight-name")[2];
+    if (benchmarkHighlight) {
+      replace(benchmarkHighlight, [colorDAS(), document.createTextNode("-Bench & Results:")]);
     }
     const audience = document.querySelectorAll(".audience-statements p span");
     if (audience[0]) audience[0].textContent = "Build a structured map of an unfamiliar field.";
@@ -309,12 +329,12 @@
   }
 
   function scrollToSection(id) {
-    const section = document.getElementById(id);
+    const section = id === "top" ? document.querySelector(".hero") : document.getElementById(id);
     if (!section) return;
     document.documentElement.classList.add("direct-section-jump");
-    history.pushState(null, "", `#${id}`);
+    history.pushState(null, "", id === "top" ? `${window.location.pathname}${window.location.search}` : `#${id}`);
     window.scrollTo({
-      top: window.scrollY + section.getBoundingClientRect().top,
+      top: id === "top" ? 0 : window.scrollY + section.getBoundingClientRect().top,
       behavior: "auto",
     });
     window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
@@ -324,7 +344,7 @@
 
   function syncNavigation() {
     const targets = ["motivation", "method", "manuscripts", "benchmark"];
-    const sidebarLabels = ["Why DAS", "How DAS Works", "Surveys by DAS", "DAS-Bench"];
+    const sidebarLabels = ["Why DAS", "How DAS Works", "Surveys by DAS", "DAS-Bench & Results"];
     document.querySelectorAll(".section-navigation nav button").forEach((button, index) => {
       button.dataset.target = targets[index];
       const number = button.querySelector("span");
@@ -337,7 +357,7 @@
     });
     document.querySelectorAll(".hero-button").forEach((button, index) => {
       const target = ["motivation", "method", "manuscripts", "benchmark"][index];
-      const label = ["Why DAS", "How DAS Works", "Surveys by DAS", "DAS-Bench"][index];
+      const label = ["Why DAS", "How DAS Works", "Surveys by DAS", "DAS-Bench & Results"][index];
       button.dataset.target = target;
       button.setAttribute("href", `#${target}`);
       const text = button.querySelector("span:not(.hero-button-index)");
@@ -346,6 +366,14 @@
         colorBrandText(text);
       }
     });
+    const home = document.querySelector(".navigation-brand");
+    if (home) {
+      home.dataset.target = "top";
+      home.setAttribute("role", "button");
+      home.setAttribute("tabindex", "0");
+      home.setAttribute("aria-label", "Back to DAS home");
+      home.title = "Back to home";
+    }
   }
 
   function colorBrandText(node) {
@@ -394,11 +422,17 @@
     if (document.documentElement.dataset.dasFinalNavigation) return;
     document.documentElement.dataset.dasFinalNavigation = "true";
     document.addEventListener("click", (event) => {
-      const button = event.target.closest(".hero-button, .section-navigation nav button");
+      const button = event.target.closest(".hero-button, .section-navigation nav button, .navigation-brand");
       if (!button?.dataset.target) return;
       event.preventDefault();
       event.stopPropagation();
       scrollToSection(button.dataset.target);
+    }, true);
+    document.addEventListener("keydown", (event) => {
+      const home = event.target.closest(".navigation-brand");
+      if (!home || !["Enter", " "].includes(event.key)) return;
+      event.preventDefault();
+      scrollToSection("top");
     }, true);
   }
 
