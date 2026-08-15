@@ -3162,9 +3162,12 @@ html.direct-section-jump *::after {
 /* Final review changes: tightly scoped Hero, navigation, results, and footer repairs. */
 .hero-resources {
   --hero-resource-icon-size: clamp(28px, 1.05vmin, 36px);
+  --hero-resource-width: clamp(116px, 8.8vw, 230px);
 }
 
 .hero-resources > :is(span, .hero-resource-link) {
+  width: var(--hero-resource-width) !important;
+  min-width: var(--hero-resource-width) !important;
   min-height: calc(var(--hero-resource-icon-size) + 16px) !important;
   gap: clamp(9px, .62vw, 12px) !important;
   padding: 8px clamp(14px, 1vw, 18px) 8px 10px !important;
