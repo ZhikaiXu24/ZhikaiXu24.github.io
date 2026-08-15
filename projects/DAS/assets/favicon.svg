@@ -1,7 +1,14 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DAS">
-  <rect width="64" height="64" rx="13" fill="#F8F2DC"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="11.5" fill="none" stroke="#171710" stroke-opacity=".18" stroke-width="3"/>
-  <text x="3" y="43" font-family="Georgia, 'Times New Roman', serif" font-size="31" font-weight="700" letter-spacing="-3">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DAS loop">
+  <defs>
+    <linearGradient id="loop" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A93E3D"/>
+      <stop offset=".5" stop-color="#E98524"/>
+      <stop offset="1" stop-color="#528A68"/>
+    </linearGradient>
+  </defs>
+  <path d="M59.5 34A28.5 28.5 0 1 1 50.5 10.5" fill="none" stroke="url(#loop)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M42.4 9.3 50.8 10.4 49.1 18.7" fill="none" stroke="#528A68" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="5.5" y="41.5" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" letter-spacing="-3">
     <tspan fill="#A93E3D">D</tspan><tspan fill="#E98524">A</tspan><tspan fill="#528A68">S</tspan>
   </text>
 </svg>
