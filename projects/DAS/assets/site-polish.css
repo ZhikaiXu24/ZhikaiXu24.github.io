@@ -3168,6 +3168,39 @@ html.direct-section-jump *::after {
   min-height: calc(var(--hero-resource-icon-size) + 16px) !important;
   gap: clamp(9px, .62vw, 12px) !important;
   padding: 8px clamp(14px, 1vw, 18px) 8px 10px !important;
+  position: relative;
+  overflow: hidden;
+  transition: color .3s, border-color .3s, background .3s,
+    transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s !important;
+}
+
+.hero-resources > :is(span, .hero-resource-link)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, #0000 22%, #fff3, #0000 72%);
+  transform: translateX(-110%);
+  transition: transform .55s;
+}
+
+.hero-resources > :is(span, .hero-resource-link) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-resources > :is(span, .hero-resource-link):hover,
+.hero-resources > :is(span, .hero-resource-link):focus-visible {
+  color: #fff;
+  background: #ffffff21;
+  border-color: #ffffff80;
+  outline: none;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 42px #0000005c;
+}
+
+.hero-resources > :is(span, .hero-resource-link):hover::before,
+.hero-resources > :is(span, .hero-resource-link):focus-visible::before {
+  transform: translateX(110%);
 }
 
 .hero-resources .resource-mark {
@@ -3212,10 +3245,14 @@ html.direct-section-jump *::after {
   cursor: help;
 }
 
-.hero-statement {
+.hero-statement,
+.hero-abstract {
   width: 100% !important;
-  max-width: min(87vw, 2800px) !important;
-  font-size: clamp(17px, 1.15vw, 27px) !important;
+  max-width: min(92vw, 2800px) !important;
+}
+
+.hero-statement {
+  font-size: clamp(19px, calc(1.15vw + 2px), 29px) !important;
   white-space: normal;
   text-wrap: balance;
 }
@@ -3239,21 +3276,27 @@ html.direct-section-jump *::after {
 }
 
 .navigation-brand[role="button"] {
-  display: inline-flex;
+  display: flex;
+  flex: 1 1 auto;
   align-items: baseline;
-  margin: -4px -6px;
-  padding: 4px 6px;
-  border-radius: 8px;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 44px;
+  margin: -6px 0 -6px -6px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 13px;
   cursor: pointer;
-  transition: color .22s, background .22s, transform .22s;
+  transition: color .22s, background .22s, border-color .22s, transform .22s;
 }
 
 .navigation-brand[role="button"]:hover,
 .navigation-brand[role="button"]:focus-visible {
-  background: #ffffff78;
-  outline: 1px solid #17171028;
-  outline-offset: 2px;
-  transform: translateY(-1px);
+  color: var(--ink);
+  background: #97771814;
+  border-color: #9777182e;
+  outline: none;
 }
 
 .benchmark-overview {
