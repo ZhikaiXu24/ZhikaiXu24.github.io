@@ -152,7 +152,7 @@
     }
     const benchmarkHighlight = document.querySelectorAll(".highlight-name")[2];
     if (benchmarkHighlight) {
-      replace(benchmarkHighlight, [colorDAS(), document.createTextNode("-Bench & Results:")]);
+      replace(benchmarkHighlight, [colorDAS(), document.createTextNode("-Bench:")]);
     }
     const audience = document.querySelectorAll(".audience-statements p span");
     if (audience[0]) audience[0].textContent = "Build a structured map of an unfamiliar field.";

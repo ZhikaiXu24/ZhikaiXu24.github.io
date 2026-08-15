@@ -224,7 +224,7 @@
 
     const overview = createElement("section", "benchmark-overview");
     const benchmarkTitle = createElement("h2", "benchmark-title");
-    benchmarkTitle.append(coloredDAS(), document.createTextNode("-Bench"));
+    benchmarkTitle.append(coloredDAS(), document.createTextNode("-Bench & Results"));
     const evidence = createElement("div", "benchmark-evidence");
     [
       ["01", "./assets/das_bench_web.png", "DAS-Bench & Results quantitative results"],

@@ -3245,8 +3245,7 @@ html.direct-section-jump *::after {
   cursor: help;
 }
 
-.hero-statement,
-.hero-abstract {
+.hero-statement {
   width: 100% !important;
   max-width: min(92vw, 2800px) !important;
 }
