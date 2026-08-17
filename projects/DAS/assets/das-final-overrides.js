@@ -378,6 +378,10 @@
 
   function colorBrandText(node) {
     if (!node || node.closest(".hero-abstract, .colored-das")) return;
+    if (node.textContent.startsWith("220 Popular Topic Surveys by DAS")) {
+      const text = node.textContent;
+      node.replaceChildren(element("span", "initial-d", "220"), document.createTextNode(text.slice(3)));
+    }
     const textNodes = [];
     const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
       acceptNode(textNode) {
