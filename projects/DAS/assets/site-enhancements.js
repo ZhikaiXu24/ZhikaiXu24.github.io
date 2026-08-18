@@ -252,7 +252,7 @@
 
     const methodPanel = createElement("div", "benchmark-methods");
     const ours = createElement("div", "benchmark-ours");
-    ours.append(createElement("strong", "", "DAS (Ours)"));
+    ours.append(createElement("strong", "", "DAS"));
     methodPanel.append(ours);
     const baselineButtons = createElement("div", "benchmark-method-buttons");
 
@@ -289,7 +289,7 @@
       topicButtons.forEach(([topic, button]) => button.classList.toggle("active", topic.id === activeTopic.id));
       methodButtons.forEach(([method, button]) => button.classList.toggle("active", method.id === activeMethod.id));
       replaceChildren(readers, [
-        buildBenchmarkReader({ id: "das", label: "DAS (Ours)", date: "" }, activeTopic),
+        buildBenchmarkReader({ id: "das", label: "DAS", date: "" }, activeTopic),
         buildBenchmarkReader(activeMethod, activeTopic),
       ]);
     }
