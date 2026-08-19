@@ -434,6 +434,7 @@
     }
 
     const resourceLinks = [
+      ["arXiv", "https://arxiv.org/abs/2608.18034"],
       ["Code", "https://github.com/ZhikaiXu24/DAS"],
       ["Huggingface", "https://huggingface.co/datasets/ZhikaiXu24/DAS-2M"],
     ];
