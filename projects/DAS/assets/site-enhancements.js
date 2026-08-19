@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  if (window.__dasSiteEnhancementsInitialized) return;
+  window.__dasSiteEnhancementsInitialized = true;
+
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const surveyTopic = "Reasoning in Large Language Models";
   const benchmarkTopics = [
@@ -886,8 +889,36 @@
     }
   }
 
+  function reactRootIsReady(root) {
+    return Boolean(
+      root &&
+      root.querySelector(".hero") &&
+      root.querySelector("#motivation") &&
+      root.querySelector("#method") &&
+      root.querySelector("#benchmark") &&
+      root.querySelector("#manuscripts")
+    );
+  }
+
+  function whenReactRootIsReady(callback) {
+    let completed = false;
+    let observer;
+
+    const finishIfReady = () => {
+      const root = document.getElementById("root");
+      if (completed || !reactRootIsReady(root)) return;
+      completed = true;
+      observer?.disconnect();
+      window.requestAnimationFrame(() => callback(root));
+    };
+
+    observer = new MutationObserver(finishIfReady);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    finishIfReady();
+  }
+
   function initialize() {
-    window.requestAnimationFrame(() => {
+    whenReactRootIsReady((root) => {
       applyPublicContent();
       bindNavigationHelpers();
       window.addEventListener("wheel", handleSteppedWheel, { passive: false });
@@ -903,10 +934,7 @@
         });
         bindNavigationHelpers();
       });
-      const observerRoot = document.getElementById("root") || document.body;
-      if (observerRoot instanceof Node) {
-        observer.observe(observerRoot, { childList: true, subtree: true });
-      }
+      observer.observe(root, { childList: true, subtree: true });
     });
   }
 

@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  if (window.__dasFinalOverridesInitialized) return;
+  window.__dasFinalOverridesInitialized = true;
+
   const demoTopic = "Reasoning in Large Language Models";
   const manuscriptTitle = "Reasoning in Large Language Models: A Survey";
   const subsectionTitle = "3.1.2 Adaptive Test-Time Scaling";
@@ -526,8 +529,36 @@
     rebuildSurveyGallery();
   }
 
+  function reactRootIsReady(root) {
+    return Boolean(
+      root &&
+      root.querySelector(".hero") &&
+      root.querySelector("#motivation") &&
+      root.querySelector("#method") &&
+      root.querySelector("#benchmark") &&
+      root.querySelector("#manuscripts")
+    );
+  }
+
+  function whenReactRootIsReady(callback) {
+    let completed = false;
+    let observer;
+
+    const finishIfReady = () => {
+      const root = document.getElementById("root");
+      if (completed || !reactRootIsReady(root)) return;
+      completed = true;
+      observer?.disconnect();
+      requestAnimationFrame(() => callback(root));
+    };
+
+    observer = new MutationObserver(finishIfReady);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    finishIfReady();
+  }
+
   function initialize() {
-    requestAnimationFrame(() => {
+    whenReactRootIsReady((root) => {
       let applying = false;
       const apply = () => {
         applying = true;
@@ -542,8 +573,7 @@
         scheduled = true;
         requestAnimationFrame(() => { scheduled = false; apply(); });
       };
-      const root = document.getElementById("root");
-      if (root) new MutationObserver(schedule).observe(root, { childList: true, subtree: true });
+      new MutationObserver(schedule).observe(root, { childList: true, subtree: true });
       const refreshNavigation = () => requestAnimationFrame(() => {
         syncNavigation();
         markActiveNavigation();
