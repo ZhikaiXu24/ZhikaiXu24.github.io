@@ -163,6 +163,10 @@ section {
   margin-bottom: 34px;
 }
 
+main > section:last-of-type {
+  margin-bottom: 0;
+}
+
 h2 {
   margin: 0 0 12px;
   color: var(--heading);
@@ -365,7 +369,7 @@ strong {
 }
 
 footer {
-  margin-top: 48px;
+  margin-top: 18px;
   padding-top: 17px;
   border-top: 1px solid var(--line);
   color: #92989e;
