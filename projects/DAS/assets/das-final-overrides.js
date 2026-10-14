@@ -103,6 +103,16 @@
     return mark;
   }
 
+  function brandLogo(className) {
+    const logo = element("img", className);
+    logo.src = "./assets/favicon.png?v=20260816b";
+    logo.alt = "";
+    logo.width = 512;
+    logo.height = 512;
+    logo.setAttribute("aria-hidden", "true");
+    return logo;
+  }
+
   function setCandidate(row) {
     if (!row) return;
     const heading = row.querySelector(":scope > strong, :scope > .candidate-copy strong");
@@ -119,6 +129,13 @@
   }
 
   function updateHeroAndWhy() {
+    const heroTitleBrand = document.querySelector(".hero-title-brand");
+    if (heroTitleBrand && !heroTitleBrand.closest(".hero-title-row")) {
+      const row = element("span", "hero-title-row");
+      heroTitleBrand.before(row);
+      row.append(brandLogo("hero-brand-logo"), heroTitleBrand);
+    }
+
     const statement = document.querySelector(".hero-statement");
     if (statement) {
       replace(statement, [
@@ -371,6 +388,9 @@
     });
     const home = document.querySelector(".navigation-brand");
     if (home) {
+      if (!home.querySelector(".navigation-brand-logo")) {
+        home.prepend(brandLogo("navigation-brand-logo"));
+      }
       home.dataset.target = "top";
       home.setAttribute("role", "button");
       home.setAttribute("tabindex", "0");

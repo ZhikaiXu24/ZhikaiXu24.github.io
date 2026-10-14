@@ -3380,3 +3380,46 @@ html.direct-section-jump *::after {
     gap: 8px !important;
   }
 }
+
+/* Keep the logo/title row narrower than the subtitle below it. */
+.hero h1 > .hero-title-row {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: .22em;
+  max-width: 100%;
+  font-size: clamp(46px, 7.5vmin, 124px);
+}
+
+.hero-title-row .hero-title-brand {
+  font-size: inherit !important;
+  white-space: nowrap;
+}
+
+.hero-brand-logo {
+  display: block;
+  flex: 0 0 auto;
+  width: .74em;
+  height: .74em;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .hero h1 > .hero-title-row {
+    font-size: clamp(22px, 7vw, 40px);
+  }
+}
+
+.navigation-brand[role="button"]:has(.navigation-brand-logo) {
+  align-items: center;
+}
+
+.navigation-brand-logo {
+  display: block;
+  flex: 0 0 auto;
+  width: .86em;
+  height: .86em;
+  margin-right: .24em;
+  object-fit: contain;
+}
