@@ -457,6 +457,25 @@
       resource.replaceWith(link);
     });
 
+    const resources = document.querySelector(".hero-resources");
+    if (resources && !resources.querySelector(".hero-resource-synced")) {
+      const link = createElement("a", "hero-resource-link hero-resource-synced");
+      link.href = "https://mp.weixin.qq.com/s/CqknBtZNdQy5a-aDYd6mlA";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", "机器之心关于 DAS 的报道（新窗口打开）");
+      const mark = createElement("i", "resource-mark resource-synced");
+      mark.setAttribute("aria-hidden", "true");
+      const logo = createElement("img");
+      logo.src = "./assets/jiqizhixin.jpg";
+      logo.alt = "";
+      logo.width = 500;
+      logo.height = 500;
+      mark.append(logo);
+      link.append(mark, createElement("b", "resource-das-label", "机器之心"));
+      resources.append(link);
+    }
+
     const statement = document.querySelector(".hero-statement");
     if (statement && !document.querySelector(".hero-abstract")) {
       const abstract = createElement("p", "hero-abstract");

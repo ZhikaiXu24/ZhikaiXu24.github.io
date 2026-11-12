@@ -3223,6 +3223,17 @@ html.direct-section-jump *::after {
   object-fit: contain !important;
 }
 
+.hero-resources .resource-synced img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.hero-resource-synced .resource-das-label {
+  white-space: nowrap;
+}
+
 .hero-resources .resource-arxiv {
   font-size: clamp(9px, .34vmin, 11px) !important;
   letter-spacing: -.07em;
