@@ -423,6 +423,12 @@
 
   function applyPublicContent() {
     const heroAuthors = document.querySelectorAll(".hero-authors span");
+    const firstAuthorName = heroAuthors[0]?.firstChild;
+    if (firstAuthorName?.nodeType === Node.TEXT_NODE && firstAuthorName.textContent === "Zhikai Xu") {
+      const link = createElement("a", "", firstAuthorName.textContent);
+      link.href = "https://zhikaixu24.github.io/";
+      firstAuthorName.replaceWith(link);
+    }
     const tengAffiliation = heroAuthors[2]?.querySelector("sup");
     if (tengAffiliation) tengAffiliation.textContent = "2";
 
