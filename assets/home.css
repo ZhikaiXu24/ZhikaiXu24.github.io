@@ -8,6 +8,7 @@
   --soft: #f7f9fa;
   --badge: #345d7d;
   --paper-width: 1060px;
+  --nav-height: 3.25rem;
 }
 
 * {
@@ -16,6 +17,32 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+}
+
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  box-shadow: 0 1px var(--line);
+}
+
+.section-nav-inner {
+  width: min(var(--paper-width), calc(100% - 30px));
+  margin-inline: auto;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 32px);
+  overflow-x: auto;
+  white-space: nowrap;
+  font: 600 clamp(13px, 2vw, 16px)/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.section-nav a {
+  padding-block: .7rem;
+  color: var(--heading);
 }
 
 body {
@@ -59,7 +86,7 @@ summary:focus-visible {
 
 .profile {
   position: sticky;
-  top: 52px;
+  top: calc(var(--nav-height) + 1rem);
   align-self: start;
   text-align: center;
 }
@@ -272,6 +299,10 @@ strong {
 
 .paper-preview:hover img {
   transform: scale(1.015);
+}
+
+.paper-preview.tarsphere-preview img {
+  object-fit: contain;
 }
 
 .venue-badge {
