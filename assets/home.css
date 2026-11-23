@@ -37,12 +37,12 @@ html {
   gap: clamp(12px, 3vw, 32px);
   overflow-x: auto;
   white-space: nowrap;
-  font: 600 clamp(13px, 2vw, 16px)/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 500 clamp(0.8rem, 2vw, 0.875rem)/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .section-nav a {
   padding-block: .7rem;
-  color: var(--heading);
+  color: #70767b;
 }
 
 body {
@@ -270,7 +270,7 @@ strong {
   display: grid;
   grid-template-columns: 205px minmax(0, 1fr);
   gap: 20px;
-  align-items: start;
+  align-items: center;
   margin: 0 0 28px;
 }
 
