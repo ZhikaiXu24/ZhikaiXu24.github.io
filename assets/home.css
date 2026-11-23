@@ -15,6 +15,50 @@
   box-sizing: border-box;
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #d6dce3;
+  --heading: #e5edf6;
+  --link: #99c5e4;
+  --link-hover: #c5e6ff;
+  --muted: #acb6c1;
+  --line: #3c4651;
+  --soft: #252c33;
+}
+[data-theme="dark"] :is(body, .section-nav) { background: #181c21; }
+[data-theme="dark"] :is(.section-nav a, footer, .beyond summary, .theme-toggle) { color: var(--muted); }
+[data-theme="dark"] :is(strong, .paper-content h3) { color: var(--heading); }
+[data-theme="dark"] .paper-links a { color: var(--link); background: var(--soft); border-color: #566373; }
+[data-theme="dark"] .paper-links a:hover { background: var(--line); }
+[data-theme="dark"] .beyond-content { background: var(--soft); border-color: var(--line); }
+[data-theme="dark"] .social-links .github-icon { background-color: var(--ink); }
+[data-theme="dark"] img.social-icon { filter: brightness(0) invert(.85); }
+
+.theme-toggle {
+  margin-inline-start: auto;
+  flex: 0 0 36px;
+  height: 40px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  color: #70767b;
+  cursor: pointer;
+}
+.theme-toggle:hover { background: var(--soft); }
+.theme-toggle:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; }
+.theme-toggle[hidden], .theme-toggle .moon, [data-theme="dark"] .theme-toggle .sun { display: none; }
+[data-theme="dark"] .theme-toggle .moon { display: inline; }
+@media (max-width: 400px) {
+  .section-nav .section-nav-inner { width: calc(100% - 12px); gap: 6px; }
+}
+@media (max-width: 350px) {
+  .section-nav .section-nav-inner { width: calc(100% - 8px); gap: 4px; font-size: .75rem; }
+  .section-nav a[href="#interests-heading"] { max-width: 6em; white-space: normal; text-align: center; }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + 1rem);
